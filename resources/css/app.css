@@ -5,3 +5,51 @@
 [x-cloak] {
     display: none;
 }
+
+body {
+    font-family: 'Maitree', sans-serif;
+}
+
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: #9fe6c3 !important;
+}
+
+*::-webkit-scrollbar {
+	width: 5px;
+	height: 8px;
+	background: transparent;
+    height: 8px; /* Ajusta según tus preferencias */
+}
+
+*::-webkit-scrollbar-thumb {
+	background: #cccccc;
+	border-radius: 2px;
+}
+
+*::-webkit-scrollbar-thumb:horizontal {
+	background: #cccccc;
+	border-radius: 2px;
+}
+
+@layer components{
+    .input{
+        @apply h-9 w-full bg-transparent border placeholder:text-gray3 border-[#D9D9D9] text-gray-600 text-sm rounded-md focus:ring-0 focus:border-gray4 block p-2.5;
+    }
+
+    .textarea{
+        @apply bg-transparent placeholder:text-gray3 border border-[#D9D9D9] text-gray1 text-sm rounded-md focus:ring-0 focus:border-gray4 block w-full p-2.5;
+    }
+
+    .label{
+        @apply block mb-2 text-sm font-medium text-gray-600;
+    }
+    
+    .hover-3dbuttom{
+        @apply hover:shadow-md transition ease-in-out duration-300 hover:-translate-y-2;
+    }
+      
+}

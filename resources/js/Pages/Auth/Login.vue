@@ -7,6 +7,8 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import InputWithPlaceholder from "@/Components/MyComponents/InputWithPlaceholder.vue";
+import { ref } from 'vue';
 
 defineProps({
     canResetPassword: Boolean,
@@ -27,6 +29,14 @@ const submit = () => {
         onFinish: () => form.reset('password'),
     });
 };
+
+const showPassword = ref(false);
+const password = ref('');
+
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+};
+
 </script>
 
 <template>
@@ -37,13 +47,25 @@ const submit = () => {
             <AuthenticationCardLogo />
         </template>
 
+        <div class="border-b border-gray-300 mb-12 text-center w-[80%] mx-auto">
+            <span class="inline-block border-b-2 border-primary px-3 text-gray-600">Iniciar sesión</span>
+        </div>
+
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputWithPlaceholder
+                    id="email" 
+                    v-model="form.email"
+                    inputType="email"
+                    autofocus
+                    autocomplete="username"
+                > Correo electrónico
+                </InputWithPlaceholder>
+                <!-- <InputLabel for="email" value="Email" />
                 <TextInput
                     id="email"
                     v-model="form.email"
@@ -52,12 +74,28 @@ const submit = () => {
                     required
                     autofocus
                     autocomplete="username"
-                />
+                /> -->
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <div class="mt-4 relative">
+                    <div class="flex justify-center items-center">
+                        <InputWithPlaceholder
+                        id="password" 
+                        v-model="form.password"
+                        :inputType="showPassword ? 'text' : 'password'"
+                        autofocus
+                        autocomplete="username"
+                        > Contraseña
+                        </InputWithPlaceholder>
+                        <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                            class="text-gray-400 ml-2 cursor-pointer absolute right-3 top-3"
+                            @click="togglePasswordVisibility"></i>
+                    </div>
+                    <InputError class="mt-2" :message="form.errors.password" />
+                </div>
+                <!-- <InputLabel for="password" value="Password" />
                 <TextInput
                     id="password"
                     v-model="form.password"
@@ -65,24 +103,24 @@ const submit = () => {
                     class="mt-1 block w-full"
                     required
                     autocomplete="current-password"
-                />
+                /> -->
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="block mt-4">
                 <label class="flex items-center">
                     <Checkbox v-model:checked="form.remember" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ms-2 text-sm text-gray-600">No cerrar sesión</span>
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Forgot your password?
+            <div class="flex flex-col space-y-5 items-center justify-center mt-4">
+                <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2">
+                    Olvidé mi contraseña
                 </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                <PrimaryButton class="" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Iniciar sesión <i class="fa-solid fa-arrow-right ml-2"></i>
                 </PrimaryButton>
             </div>
         </form>
