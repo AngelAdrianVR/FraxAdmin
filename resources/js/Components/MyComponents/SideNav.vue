@@ -5,9 +5,10 @@
         <!-- Logo -->
         <div class="shrink-0 flex items-center justify-center mt-4">
             <Link :href="route('dashboard')">
-            <ApplicationMark class="block w-16" />
+                <ApplicationMark class="block w-16" />
             </Link>
         </div>
+            <p class="text-center text-white text-sm mt-3">FraX Admin</p>
             <nav class="px-2 pt-10 text-white">
                 <template v-for="(menu, index) in menus" :key="index">
                     <div v-if="menu.show">

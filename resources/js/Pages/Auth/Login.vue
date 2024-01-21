@@ -57,54 +57,36 @@ const togglePasswordVisibility = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputWithPlaceholder
-                    id="email" 
+                <InputLabel for="user" value="Usuario" class="mb-2 ml-3" />
+                <input
+                    class="input"
+                    id="user" 
                     v-model="form.email"
                     inputType="email"
                     autofocus
                     autocomplete="username"
-                > Correo electrónico
-                </InputWithPlaceholder>
-                <!-- <InputLabel for="email" value="Email" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    required
-                    autofocus
-                    autocomplete="username"
-                /> -->
+                >
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
             <div class="mt-4">
                 <div class="mt-4 relative">
+                    <InputLabel for="password" value="Contraseña" class="mb-2 ml-3" />
                     <div class="flex justify-center items-center">
-                        <InputWithPlaceholder
+                        <input
+                        class="input"
                         id="password" 
                         v-model="form.password"
-                        :inputType="showPassword ? 'text' : 'password'"
+                        :type="showPassword ? 'text' : 'password'"
                         autofocus
                         autocomplete="username"
-                        > Contraseña
-                        </InputWithPlaceholder>
+                        >
                         <i :class="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"
-                            class="text-gray-400 ml-2 cursor-pointer absolute right-3 top-3"
+                            class="text-gray-400 ml-2 cursor-pointer absolute right-3 top-10"
                             @click="togglePasswordVisibility"></i>
                     </div>
                     <InputError class="mt-2" :message="form.errors.password" />
                 </div>
-                <!-- <InputLabel for="password" value="Password" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class="mt-1 block w-full"
-                    required
-                    autocomplete="current-password"
-                /> -->
-                <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
             <div class="block mt-4">
