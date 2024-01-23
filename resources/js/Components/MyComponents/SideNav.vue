@@ -2,12 +2,12 @@
     <!-- sidebar -->
     <div class="h-screen hidden md:block shadow-lg relative">
         <div class="bg-[#313131] h-full overflow-auto">
-        <!-- Logo -->
-        <div class="shrink-0 flex items-center justify-center mt-4">
-            <Link :href="route('dashboard')">
+            <!-- Logo -->
+            <div class="shrink-0 flex items-center justify-center mt-4">
+                <Link :href="route('dashboard')">
                 <ApplicationMark class="block w-16" />
-            </Link>
-        </div>
+                </Link>
+            </div>
             <p class="text-center text-white text-sm mt-3">FraX Admin</p>
             <nav class="px-2 pt-10 text-white">
                 <template v-for="(menu, index) in menus" :key="index">
@@ -23,7 +23,8 @@
                                 </button>
                             </div>
                         </Accordion>
-                        <button v-else @click="goToRoute(menu.route)" v-if="menu.show" :active="menu.active" :title="menu.label"
+                        <button v-else @click="goToRoute(menu.route)" v-if="menu.show" :active="menu.active"
+                            :title="menu.label"
                             class="w-full text-start px-2 mb-1 flex justify-between text-xs rounded-md py-1"
                             :class="menu.active ? 'bg-primary text-white' : 'hover:text-primary'">
                             <p class="w-full truncate"><span v-html="menu.icon"></span> {{ menu.label }}</p>
@@ -72,15 +73,15 @@ export default {
                 //     dropdown: false,
                 //     show: true
                 // },
-                // {
-                //     label: 'Reservación de áreas',
-                //     icon: '<i class="fa-solid fa-leaf text-sm mr-2"></i>',
-                //     route: route('common-areas-users.index'),
-                //     active: route().current('common-areas-users.*'),
-                //     options: [],
-                //     dropdown: false,
-                //     show: true
-                // },
+                {
+                    label: 'Reservación de áreas',
+                    icon: '<i class="fa-solid fa-leaf text-sm mr-2"></i>',
+                    route: route('common-areas.index'),
+                    active: route().current('common-areas.*'),
+                    options: [],
+                    dropdown: false,
+                    show: true
+                },
                 // {
                 //     label: 'Mantenimiento',
                 //     icon: '<i class="fa-solid fa-screwdriver-wrench text-sm mr-2"></i>',
@@ -142,7 +143,7 @@ export default {
                 //     dropdown: false,
                 //     show: true
                 // },
-                
+
             ],
         }
     },

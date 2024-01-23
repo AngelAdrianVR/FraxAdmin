@@ -1,21 +1,11 @@
 <?php
 
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CommonAreaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -49,3 +39,7 @@ Route::post('users-read-notifications', [UserController::class, 'readNotificatio
 Route::resource('calendars', CalendarController::class)->middleware('auth');
 Route::put('calendars-{calendar}-task-done', [CalendarController::class, 'taskDone'])->name('calendars.task-done')->middleware('auth');
 Route::put('calendars/set-attendance-confirmation/{calendar}', [CalendarController::class, 'SetAttendanceConfirmation'])->name('calendars.set-attendance-confirmation');
+
+
+// --------------- common areas routes -----------------
+Route::resource('common-areas', CommonAreaController::class)->middleware('auth');
